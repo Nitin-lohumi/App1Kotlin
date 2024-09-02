@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">App3</string>
+    <string name="box1">green</string>
+    <string name="box2">red</string>
+    <string name="box3">yellow</string>
+    <string name="box4">Blue</string>
+    <string name="placeholder">"Enter your name "</string>
+</resources>
