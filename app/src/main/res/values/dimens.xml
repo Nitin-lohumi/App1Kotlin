@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textSize">20dp</dimen>
-    <dimen name="padding">10dp</dimen>
-    <dimen name="margin">10dp</dimen>
-    <dimen name="margintop">15dp</dimen>
+    <dimen name="textSize">16dp</dimen>
+    <dimen name="padding1">0dp</dimen>
+    <dimen name="padding2">5dp</dimen>
+    <dimen name="marginright">5dp</dimen>
+    <dimen name="marginleft">10dp</dimen>
 </resources>

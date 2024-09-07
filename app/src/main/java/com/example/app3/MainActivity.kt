@@ -1,70 +1,60 @@
 package com.example.app3
-import android.graphics.Color
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.IntegerRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.app3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-//    private var viewModel: TwoWayViewModel? = TwoWayViewModel()
+    private lateinit var binding: ActivityMainBinding
+    private var  Value:Number =0;
+    //    private var viewModel: TwoWayViewModel? = TwoWayViewModel()
     var click = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-          binding.View.setOnClickListener {
-              if(click){
-                  binding.apply {
-                      View.setBackgroundColor(Color.GRAY)
-                      text1.setTextColor(-0x1);
-                      textTwo.setTextColor(-0x1)
-                      textThree.setTextColor(-0x1)
-                      text4.setTextColor(-0x1)
-                  }
-                  showBox();
-                  click = false
-              }else{
-                  binding.apply {
-                      View.setBackgroundColor(Color.BLACK)
-                      text1.setTextColor(getColor(R.color.black));
-                      textTwo.setTextColor(getColor(R.color.black))
-                      textThree.setTextColor(getColor(R.color.black))
-                      text4.setTextColor(getColor(R.color.black))
-                  }
-                  click = true
-              }
-        }
-    }
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+       binding.apply {
+           val ids:List<Button> = listOf<Button>(one,two,three,four,five,six,seven,eight,nine,zero,dot,equal,C,mode,multiply,minus,operator1,divide,plus)
 
-    private fun showBox() {
-           binding.apply {
-               val clickableView:List<View> = listOf(text1,textTwo,textThree,text4);
-               for (item in clickableView){
-                   item.setOnClickListener { makeColor(it) }
-
-               }
+           for(id in ids){
+               showNumber.text =""
+            id.setOnClickListener {
+                click(it)
+            }
            }
+       }
     }
 
-    private fun makeColor(view: View?) {
-    if(!click){
-        when(view){
-            binding.text1->view.setBackgroundColor(Color.GREEN);
-            binding.textTwo->view.setBackgroundColor(Color.RED);
-            binding.textThree->view.setBackgroundColor(Color.YELLOW);
-            binding.text4->view.setBackgroundColor(Color.BLUE);
-        }
+    private fun click(it: View?) {
+        var next:Int;
+        var temp:String ="";
+        binding.apply {
+            val valueButton:Int = when(it){
+                one -> {one.text.toString().toInt()}
+                two->  {two.text.toString().toInt()}
+                three->{three.text.toString().toInt()}
+                four->{four.text.toString().toInt()}
+                five->{five.text.toString().toInt()}
+                six->{six.text.toString().toInt()}
+                seven->{seven.text.toString().toInt()}
+                eight->{eight.text.toString().toInt()}
+                nine->{nine.text.toString().toInt()}
+                dot->{dot.text.toString().toInt()}
+                plus->funPlus(temp)
+                else->{zero.text.toString().toInt()}
+            }
+            next =valueButton
+            temp = next.toString()+""+showNumber.text
+            showNumber.text = temp
     }
-    else{
-        when(view){
-            binding.text1->view.setBackgroundColor(Color.BLACK);
-            binding.textTwo->view.setBackgroundColor(Color.BLACK);
-            binding.textThree->view.setBackgroundColor(Color.BLACK);
-            binding.text4->view.setBackgroundColor(Color.BLACK);
-        }
-    }
+  }
+    private fun funPlus(temp:String): Int {
+        val plus = binding.plus.text.toString().toInt() + temp.toInt()
+        return plus;
     }
 }
